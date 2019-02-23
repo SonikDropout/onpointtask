@@ -1,16 +1,26 @@
 .slider {
-  height: 768px;
-  width: 1024px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
-}
 
-.slide {
-  height: 100%;
-  position: absolute;
-  width: 1024px;
-  height: 768px;
+  &__indicators {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 30px;
+    z-index: 4001;
+    transform: translateY(-50%);
+  }
+
+  &__indicator {
+    border: 1px solid white;
+    border-radius: 50%;
+    height: 20px;
+
+    &_active {
+      background-color: orange;
+    }
+  }
 }
