@@ -1,24 +1,7 @@
+
 .horizontalSlider {
   position: relative;
 
-  &__nav {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    height: 20px;
-    z-index: 4002;
-  }
-
-  &__thumb {
-    position: absolute;
-    right: -15px;
-    background: blue;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-  }
 
   &__wrapper {
     display: flex;
@@ -30,5 +13,17 @@
 
   .slide {
     flex: 1 1;
+    background-size: cover;
+    margin-right: -1px;
+
+    &:nth-child(3) {
+      background: url('../img/Slide3_1.jpg');
+    }
+    &:nth-child(2) {
+      background: url('../img/Slide3_2.jpg');
+    }
+    &:nth-child(1) {
+      background: url('../img/Slide3_3.jpg');
+    }
   }
 }

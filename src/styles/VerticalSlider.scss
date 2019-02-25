@@ -1,3 +1,5 @@
+$orange: rgb(247, 139, 32);
+
 .slider {
   position: absolute;
   top: 50%;
@@ -8,19 +10,24 @@
   &__indicators {
     position: absolute;
     top: 50%;
-    right: 0;
-    width: 30px;
+    right: 13px;
+    width: 13px;
     z-index: 4001;
     transform: translateY(-50%);
   }
 
   &__indicator {
-    border: 1px solid white;
     border-radius: 50%;
-    height: 20px;
+    height: 13px;
+    background: white;
+    margin-bottom: 7px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &_active {
-      background-color: orange;
+      background-color: $orange;
     }
   }
 }

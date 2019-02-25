@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Lato';
+  src: url("../fonts/Lato-Regular.ttf") format("truetype");
+}
+
+
+@font-face {
+  font-family: 'Gotham-Pro';
+  src: url("../fonts/Gotham-Pro.ttf") format("truetype");
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.slide {
+  width: 1024px;
+  height: 768px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__header {
+    font: 400 50px 'Gotham-Pro', sans-serif;
+  }
+}

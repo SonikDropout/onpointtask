@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HorizontalSlider from "../components/HorizontalSlider";
-import '../styles/Slider.scss';
+import '../styles/VerticalSlider.scss';
 
 
 export default class VerticalSlider extends Component {
@@ -64,17 +64,6 @@ export default class VerticalSlider extends Component {
       index: newIndex,
       lastIndex: newIndex
     })
-  }
-
-  componentWillMount() {
-    const {
-      children,
-      height
-    } = this.props;
-
-    children.forEach(child => {
-      child.props.style.height = height;
-    });
   }
 
   renderNav() {

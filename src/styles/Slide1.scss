@@ -1,0 +1,106 @@
+$blue: #0d319c;
+$pulsar-orange: rgba(222,119,27,.5);
+$pulsar-border: rgb(215,71,41);
+
+.slide1 {
+  background-image: url('../img/Slide1.jpg');
+  color: $blue;
+  position: relative;
+  margin-bottom: -1px;
+
+  &__header {
+    position: absolute;
+    top: 133px;
+    left: 70px;
+  }
+
+  .pulsar {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid $pulsar-border;
+    background: $pulsar-orange;
+
+    &_lg {
+      width: 52px;
+      height: 52px;
+      left: 562px;
+      top: 259px;
+
+      .pulsar__caption {
+        top: 50%;
+        left: calc(100% + 10px);
+        transform: translateY(-50%);
+      }
+    }
+
+    &_md {
+      width: 27px;
+      height: 27px;
+      left: 274px;
+      top: 428px;
+    }
+
+    &_sm {
+      width: 16px;
+      height: 16px;
+      left: 477px;
+      top: 538px;
+
+      &:last-of-type {
+        left: 820px;
+        top: 519px;
+      }
+    }
+
+    &__caption {
+      font-size: 20px;
+      position: absolute;
+      font-family: 'Lato', sans-serif;
+      bottom: calc(100% + 10px);
+      white-space: nowrap;
+      height: 20px;
+      transform: translateX(-50%);
+    }
+
+    &__circle,
+    &::after,
+    &::before {
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: $pulsar-orange;;
+      border: 1px solid $pulsar-border;
+      animation: pulse 3s ease-out infinite;
+    }
+
+    &::after,
+    &::before {
+      content: "";
+      animation-delay: 1s;
+    }
+
+    &::after {
+      animation-delay: 2s;
+    }
+  }
+}
+
+
+@keyframes pulse {
+  from {
+    transform: scale(.3);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

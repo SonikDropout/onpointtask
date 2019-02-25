@@ -1,0 +1,41 @@
+$iceWhite: rgb(209, 234, 255);
+
+
+.toggle {
+  position: absolute;
+  bottom: 0;
+  height: 87px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4002;
+
+  &__scale {
+    background: $iceWhite;
+    opacity: .3;
+    height: 13px;
+  }
+
+  &__scaleFill {
+    @extend .toggle__scale;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+  }
+
+  &__thumb {
+    position: absolute;
+    transform: translate(50%, -50%);
+    background: url('../img/Thumb.png') center;
+    background-size: cover;
+    width: 43px;
+    height: 55px;
+  }
+
+  &__captions {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin-top: 30px;
+  }
+}

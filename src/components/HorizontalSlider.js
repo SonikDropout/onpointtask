@@ -1,12 +1,10 @@
 import React, { Component } from "react";
+import Toggle from "./Toggle";
 import '../styles/HorizontalSlider.scss';
 
 export default class HorizontalSlider extends Component {
   static defaultProps = {
-    navWidth: 200,
-    style: {
-      height: 0
-    },
+    navWidth: 640,
   }
 
   state = {
@@ -36,7 +34,7 @@ export default class HorizontalSlider extends Component {
 
     if (newIndex < 0) {
       newIndex = 0;
-    } else if (newIndex >= children.length) {
+    } else if (newIndex > children.length - 1) {
       newIndex = children.length - 1;
     }
 
@@ -62,42 +60,10 @@ export default class HorizontalSlider extends Component {
     })
   }
 
-  renderNav() {
-    const {
-      navWidth,
-      children
-    } = this.props;
-
-    const {
-      index
-    } = this.state;
-
-    const navRangeWidth = navWidth / (children.length - 1);
-    const offset = -index * navRangeWidth;
-
-    const thumbStyle = {
-      transform: `translateX(${offset}px)`
-    };
-
-    return (
-      <div 
-        className="horizontalSlider__nav"
-        style={{width: navWidth}}>
-          <div 
-            className="horizontalSlider__thumb"
-            style={thumbStyle}
-            onTouchStart={this.handleDragStart}
-            onTouchMove={this.handleDragMove}
-            onTouchEnd={this.handleDragEnd}/>
-      </div>
-    );
-  }
-
-
   render() {
     const {
-      style,
-      children
+      children,
+      navWidth
     } = this.props;
 
     const {
@@ -109,9 +75,17 @@ export default class HorizontalSlider extends Component {
       transform: `translateX(${ (index + 1) * (100 / children.length) - 100 }%)`,
     };
 
+    const captions = [1998, 2009, 2016];
+
     return (
-      <div className="horizontalSlider" style={{height: style.height}}>
-        {this.renderNav()}
+      <div className="horizontalSlider" style={{height: 768}}>
+        <Toggle 
+          width={navWidth} 
+          index={index} 
+          captions={captions}
+          handleDragStart={this.handleDragStart}
+          handleDragMove={this.handleDragMove}
+          handleDragEnd={this.handleDragEnd}/>
         <div 
           className="horizontalSlider__wrapper"
           style={wrapperStyles}>
