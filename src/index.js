@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Slider from "./components/Slider.js";
+import App from "./App";
 
-ReactDOM.render(<Slider />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

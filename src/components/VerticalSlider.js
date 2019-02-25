@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import HorizontalSlider from "../components/HorizontalSlider";
 import '../styles/Slider.scss';
 
-class Slider extends Component {
+
+export default class VerticalSlider extends Component {
   static defaultProps = {
     width: 1024,
     height: 768,
@@ -15,25 +17,23 @@ class Slider extends Component {
     drag: 0
   }
 
-  slidesWrapper = React.createRef();
-
   handleDragStart = (event) => {
     this.setState({
-      dragStart: event.pageY
+      dragStart: event.touches[0].pageY
     });
   }
 
   handleDragMove = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     const { height } = this.props;
     const { dragStart, lastIndex } = this.state;
-    if (dragStart) {
-      const drag = event.pageY - dragStart;
-      const newIndex = lastIndex - drag/height;
-      this.setState({
-        index: newIndex,
-        drag: drag
-      });
-    }
+    const drag = event.touches[0].pageY - dragStart;
+    const newIndex = lastIndex - drag/height;
+    this.setState({
+      index: newIndex,
+      drag: drag
+    });
   }
 
   handleDragEnd = (event) => {
@@ -69,7 +69,6 @@ class Slider extends Component {
   componentWillMount() {
     const {
       children,
-      width,
       height
     } = this.props;
 
@@ -128,26 +127,14 @@ class Slider extends Component {
           {this.renderNav()}
           <div
             className="slidesWrapper"
-            onMouseDown={this.handleDragStart}
-            onMouseMove={this.handleDragMove}
-            onMouseUp={this.handleDragEnd}
+            onTouchStart={this.handleDragStart}
+            onTouchMove={this.handleDragMove}
+            onTouchEnd={this.handleDragEnd}
             style={wrapperStyle}
             ref={this.slidesWrapper}>
             { children }
           </div>
       </div>
     );
-  }
-}
-
-export default class SliderExample extends Component {
-  render() {
-    return (
-      <Slider>
-        <div className="slide" style={{ background: '#21BB9A' }}>A</div>
-        <div className="slide" style={{ background: '#329ADD' }}>B</div>
-        <div className="slide" style={{ background: '#9A5CB9' }}>C</div>
-      </Slider>
-    )
   }
 }
