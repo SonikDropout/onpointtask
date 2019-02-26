@@ -30,8 +30,34 @@ $orange: rgb(247, 139, 32);
       background-color: $orange;
     }
   }
+
+  &__scrollHint {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: radial-gradient(45% 30% at bottom center, $orange 40%, transparent 100%),
+    radial-gradient(40% 80% at bottom center, $orange 30%, transparent 85%);
+    text-align: center;
+    z-index: 4002;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 28px;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+      transform: rotate(42deg) skew(-3deg);
+    }
+  }
 }
 
 .slidesWrapper {
-  transition: transform .1s ease;
+  transition: transform .25s ease;
 }

@@ -20,6 +20,7 @@ $iceWhite: rgb(209, 234, 255);
     opacity: 1;
     position: absolute;
     top: 0;
+    transition: width .25s ease-out;
   }
 
   &__thumb {
@@ -29,6 +30,7 @@ $iceWhite: rgb(209, 234, 255);
     background-size: cover;
     width: 43px;
     height: 55px;
+    transition: right .25s ease-out;
   }
 
   &__captions {
@@ -37,5 +39,6 @@ $iceWhite: rgb(209, 234, 255);
     justify-content: space-between;
     color: white;
     margin-top: 30px;
+    font-size: 20px;
   }
 }

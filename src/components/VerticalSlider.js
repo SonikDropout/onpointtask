@@ -7,7 +7,7 @@ export default class VerticalSlider extends Component {
   static defaultProps = {
     width: 1024,
     height: 768,
-    MIN_DRAG_TO_SWITCH_SLIDES: 30
+    MIN_DRAG_TO_SWITCH_SLIDES: 200
   }
 
   state = {
@@ -24,8 +24,6 @@ export default class VerticalSlider extends Component {
   }
 
   handleDragMove = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
     const { height } = this.props;
     const { dragStart, lastIndex } = this.state;
     const drag = event.touches[0].pageY - dragStart;
@@ -92,6 +90,20 @@ export default class VerticalSlider extends Component {
   }
 
 
+  renderHint() {
+    const {
+      index
+    } = this.state;
+
+    if (index < 0.5) {
+      return (
+        <div className="slider__scrollHint">
+          {'Листайте вниз'}
+        </div>
+      )
+    }
+  }
+
   render() {
     const {
       children,
@@ -114,6 +126,7 @@ export default class VerticalSlider extends Component {
         className="slider" 
         style={{width: width, height: height}}>
           {this.renderNav()}
+          {this.renderHint()}
           <div
             className="slidesWrapper"
             onTouchStart={this.handleDragStart}
