@@ -11,7 +11,8 @@ export default class HorizontalSlider extends Component {
     index: 0,
     lastIndex: 0,
     dragStart: 0,
-    drag: 0
+    drag: 0,
+    slide: 1
   }
 
   handleDragStart = (event) => {
@@ -38,9 +39,12 @@ export default class HorizontalSlider extends Component {
       newIndex = children.length - 1;
     }
 
+    const newSlide = Math.round(newIndex) + 1;
+
     this.setState({
       index: newIndex,
-      drag: drag
+      drag: drag,
+      slide: newSlide
     });
   }
 
@@ -67,12 +71,13 @@ export default class HorizontalSlider extends Component {
     } = this.props;
 
     const {
-      index
+      index,
+      slide
     } = this.state;
 
     const wrapperStyles = {
       width: `${ 100 * children.length }%`,
-      transform: `translateX(${ (index + 1) * (100 / children.length) - 100 }%)`,
+      transform: `translateX(${ slide * (100 / children.length) - 100 }%)`,
     };
 
     const captions = [1998, 2009, 2016];
