@@ -16,6 +16,7 @@ export default class HorizontalSlider extends Component {
   }
 
   handleDragStart = (event) => {
+    event.stopPropagation();
     this.setState({
       dragStart: event.touches[0].pageX
     });

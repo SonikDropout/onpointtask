@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import HorizontalSlider from "../components/HorizontalSlider";
 import '../styles/VerticalSlider.scss';
 
 
@@ -18,27 +17,35 @@ export default class VerticalSlider extends Component {
   }
 
   handleDragStart = (event) => {
-    this.setState({
-      dragStart: event.touches[0].pageY
-    });
+    // ignore event if user touches horizontal slider
+    if (!event.target.classList.contains('toggle__thumb')) {
+      this.setState({
+        dragStart: event.touches[0].pageY
+      });
+    }
   }
 
   handleDragMove = (event) => {
     const { height } = this.props;
     const { dragStart, lastIndex } = this.state;
+    
+    // ignore on horizontal slider action
+    if (!dragStart) return;
+
     const drag = event.touches[0].pageY - dragStart;
-    const newIndex = lastIndex - drag/height;
+    let newIndex = lastIndex - drag/height;
+
+    newIndex = this.constraintNewIndex(newIndex);
+
     this.setState({
       index: newIndex,
       drag: drag
     });
   }
 
-  handleDragEnd = (event) => {
+  handleDragEnd = () => {
     const {
-      height,
       MIN_DRAG_TO_SWITCH_SLIDES,
-      children
     } = this.props;
     const { index, drag } = this.state;
     let newIndex;
@@ -51,17 +58,25 @@ export default class VerticalSlider extends Component {
       newIndex = Math.round(index);
     }
 
-    if (newIndex < 0) {
-      newIndex = 0;
-    } else if (newIndex >= children.length) {
-      newIndex = children.length - 1;
-    }
+    newIndex = this.constraintNewIndex(newIndex);
 
     this.setState({
       dragStart: 0,
       index: newIndex,
       lastIndex: newIndex
     })
+  }
+
+  constraintNewIndex(index) {
+    const maxIndex = this.props.children.length - 1;
+
+    if (index < 0) {
+      return 0;
+    } else if (index > maxIndex) {
+      return maxIndex;
+    }
+
+    return index;
   }
 
   renderNav() {
@@ -89,21 +104,6 @@ export default class VerticalSlider extends Component {
     );
   }
 
-
-  renderHint() {
-    const {
-      index
-    } = this.state;
-
-    if (index < 0.5) {
-      return (
-        <div className="slider__scrollHint">
-          {'Листайте вниз'}
-        </div>
-      )
-    }
-  }
-
   render() {
     const {
       children,
@@ -126,7 +126,11 @@ export default class VerticalSlider extends Component {
         className="slider" 
         style={{width: width, height: height}}>
           {this.renderNav()}
-          {this.renderHint()}
+          {
+          index < 0.5 ? 
+          <div className="slider__scrollHint">Листайте вниз</div> :
+          null
+          }
           <div
             className="slidesWrapper"
             onTouchStart={this.handleDragStart}

@@ -2,12 +2,6 @@ import React, {Component} from 'react';
 import '../styles/Slide1.scss';
 
 export default class Slide1 extends Component {
-  static defaultProps = {
-    style: {
-      height: 0
-    },
-  }
-
   render() {
     const {style} = this.props;
 
@@ -18,7 +12,7 @@ export default class Slide1 extends Component {
         <Pulsar size={'sm'} caption={'Осложнения СД'} />
         <Pulsar size={'sm'} caption={'СС риски'} />
         <h2 className="slide__header slide1__header">
-          {'Всегда ли цели терапии СД2 на поверхности?'}
+          Всегда ли цели терапии СД2 на поверхности?
         </h2>
       </div>
     )
@@ -29,7 +23,6 @@ function Pulsar(props) {
   const {
     size,
     caption,
-    position
   } = props;
 
   const className = `pulsar pulsar_${size}`;

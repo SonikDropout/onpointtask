@@ -15,10 +15,6 @@ export default function Toggle(props) {
   const offset = 100/numOfSteps * index;
   const fillWidth = `${100 - offset}%`;
 
-  const captionItems = captions.map((caption, i) => {
-    return <li key={i} className="toggle__caption">{caption}</li>
-  });
-
   return (
     <div className="toggle" style={{width: width}}>
       <div className="toggle__scale"/>
@@ -30,7 +26,9 @@ export default function Toggle(props) {
         onTouchEnd={handleDragEnd}/>
       <div className="toggle__scaleFill" style={{width: fillWidth}}/>
       <ul className="toggle__captions">
-        {captionItems}
+        {captions.map((caption, i) => {
+            return <li key={i} className="toggle__caption">{caption}</li>
+        })}
       </ul>
     </div>
   )
