@@ -28,12 +28,12 @@ export default class VerticalSlider extends Component {
   handleDragMove = (event) => {
     const { height } = this.props;
     const { dragStart, lastIndex } = this.state;
-    
+
     // ignore on horizontal slider action
     if (!dragStart) return;
 
     const drag = event.touches[0].pageY - dragStart;
-    let newIndex = lastIndex - drag/height;
+    let newIndex = lastIndex - drag / height;
 
     newIndex = this.constraintNewIndex(newIndex);
 
@@ -89,12 +89,12 @@ export default class VerticalSlider extends Component {
     } = this.state;
 
     const indicators = children.map((slide, i) => {
-      return (<div 
+      return (<div
         className={(i === Math.round(index) ?
           "slider__indicator slider__indicator_active" :
           "slider__indicator")}
         key={i}
-        />);
+      />);
     });
 
     return (
@@ -112,34 +112,36 @@ export default class VerticalSlider extends Component {
     } = this.props;
 
     const {
-      index
+      index,
+      dragStart
     } = this.state;
 
-    const offset = -index*height;
+    const offset = -index * height;
 
     let wrapperStyle = {
-      transform: `translateY(${offset}px)`
+      transform: `translateY(${offset}px)`,
+      transition: dragStart ? 'transform 0s' : 'transform .25s ease-out'
     };
 
     return (
-      <div 
-        className="slider" 
-        style={{width: width, height: height}}>
-          {this.renderNav()}
-          {
-          index < 0.5 ? 
-          <div className="slider__scrollHint">Листайте вниз</div> :
-          null
-          }
-          <div
-            className="slidesWrapper"
-            onTouchStart={this.handleDragStart}
-            onTouchMove={this.handleDragMove}
-            onTouchEnd={this.handleDragEnd}
-            style={wrapperStyle}
-            ref={this.slidesWrapper}>
-            { children }
-          </div>
+      <div
+        className="slider"
+        style={{ width: width, height: height }}>
+        {this.renderNav()}
+        {
+          index < 0.5 ?
+            <div className="slider__scrollHint">Листайте вниз</div> :
+            null
+        }
+        <div
+          className="slidesWrapper"
+          onTouchStart={this.handleDragStart}
+          onTouchMove={this.handleDragMove}
+          onTouchEnd={this.handleDragEnd}
+          style={wrapperStyle}
+          ref={this.slidesWrapper}>
+          {children}
+        </div>
       </div>
     );
   }

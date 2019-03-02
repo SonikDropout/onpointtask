@@ -49,12 +49,8 @@ export default class HorizontalSlider extends Component {
     });
   }
 
-  handleDragEnd = (event) => {
-    const {
-      navWidth,
-      children
-    } = this.props;
-    const { index, drag } = this.state;
+  handleDragEnd = () => {
+    const { index } = this.state;
 
     const newIndex = Math.round(index);
 
@@ -73,30 +69,34 @@ export default class HorizontalSlider extends Component {
 
     const {
       index,
-      slide
+      slide,
+      dragStart
     } = this.state;
 
     const wrapperStyles = {
-      width: `${ 100 * children.length }%`,
-      transform: `translateX(${ slide * (100 / children.length) - 100 }%)`,
+      width: `${100 * children.length}%`,
+      transform: `translateX(${slide * (100 / children.length) - 100}%)`
     };
+
+    const transition = dragStart ? 'all 0s' : 'all .25s ease-out';
 
     const captions = [1998, 2009, 2016];
 
     return (
-      <div className="horizontalSlider" style={{height: 768}}>
-        <Toggle 
-          width={navWidth} 
-          index={index} 
+      <div className="horizontalSlider" style={{ height: 768 }}>
+        <Toggle
+          width={navWidth}
+          index={index}
           captions={captions}
           handleDragStart={this.handleDragStart}
           handleDragMove={this.handleDragMove}
-          handleDragEnd={this.handleDragEnd}/>
-        <div 
+          handleDragEnd={this.handleDragEnd}
+          transition={transition} />
+        <div
           className="horizontalSlider__wrapper"
           style={wrapperStyles}>
-            {children}
-          </div>
+          {children}
+        </div>
       </div>
     );
   }
